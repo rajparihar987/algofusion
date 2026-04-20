@@ -72,7 +72,7 @@ const Reception = () => {
          setSystemMessage(`Creating record for ${text}...`);
          speak(`Creating record for ${text}...`);
          setIsProcessing(true);
-         const res = await axios.post('http://localhost:5005/api/patient', { isNewPatient: true, name: text });
+         const res = await axios.post('https://algofusion.onrender.com/api/patient', { isNewPatient: true, name: text });
          const newId = res.data.patient.patientId;
          setSystemMessage(`Your new Patient ID is ${newId}. Transferring you to consultation.`);
          speak(`Your new Patient ID is ${newId}. Please proceed to the doctor.`);
@@ -101,7 +101,7 @@ const Reception = () => {
         speak("Checking your records.");
         setIsProcessing(true);
         
-        const res = await axios.post('http://localhost:5005/api/patient', { isNewPatient: false, patientId: matchedId });
+        const res = await axios.post('https://algofusion.onrender.com/api/patient', { isNewPatient: false, patientId: matchedId });
         
         if (res.data.success) {
           setSystemMessage(`Records found for ${res.data.patient.name}. Proceeding to consultation.`);
@@ -132,7 +132,7 @@ const Reception = () => {
             return;
          }
          setSystemMessage("Creating manual record...");
-         const res = await axios.post('http://localhost:5005/api/patient', { isNewPatient: true, name: newPatientName });
+         const res = await axios.post('https://algofusion.onrender.com/api/patient', { isNewPatient: true, name: newPatientName });
          const newId = res.data.patient.patientId;
          navigate(`/consultation/${newId}`);
       } else {
@@ -141,7 +141,7 @@ const Reception = () => {
              setIsProcessing(false);
              return;
          }
-         const res = await axios.post('http://localhost:5005/api/patient', { isNewPatient: false, patientId });
+         const res = await axios.post('https://algofusion.onrender.com/api/patient', { isNewPatient: false, patientId });
          if (res.data.success) {
             navigate(`/consultation/${patientId}`);
          }

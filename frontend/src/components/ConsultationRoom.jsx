@@ -34,7 +34,7 @@ const ConsultationRoom = () => {
 
   const fetchPatientData = async () => {
     try {
-      const res = await axios.get(`http://localhost:5005/api/patient/${patientId}`);
+      const res = await axios.get(`https://algofusion.onrender.com/api/patient/${patientId}`);
       setPatient(res.data.patient);
       setHistory(res.data.history || []);
     } catch(err) {
@@ -71,7 +71,7 @@ const ConsultationRoom = () => {
           const formData = new FormData();
           formData.append('audio', currentAudioBlob, 'accumulated.webm');
           
-          const res = await axios.post('http://localhost:5005/api/consultation/transcribe_chunk', formData, {
+          const res = await axios.post('https://algofusion.onrender.com/api/consultation/transcribe_chunk', formData, {
               headers: { 'Content-Type': 'multipart/form-data' }
           });
 
@@ -122,7 +122,7 @@ const ConsultationRoom = () => {
   const finalizeConsultationReport = async () => {
       setLiveTranscript((currentFullTranscript) => {
           
-          axios.post('http://localhost:5005/api/consultation/analyze_discussion', { 
+          axios.post('https://algofusion.onrender.com/api/consultation/analyze_discussion', { 
               patientId, 
               transcriptText: currentFullTranscript 
           })

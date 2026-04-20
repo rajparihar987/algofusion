@@ -12,7 +12,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5005;
 
-app.use(cors());
+app.use(cors({
+  origin: "https://vocaicare.netlify.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
 
 const upload = multer({ storage: multer.memoryStorage() });
